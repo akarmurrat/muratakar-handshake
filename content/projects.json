@@ -1,0 +1,10 @@
+[
+  {
+    "title": "OEE Takip Aracı",
+    "description": "Üretim verilerini toplayıp OEE raporlayan küçük bir web aracı."
+  },
+  {
+    "title": "Otonom Çizgi İzleyen",
+    "description": "Düşük maliyetli sensörlerle PID tabanlı kontrol deneyleri."
+  }
+]
