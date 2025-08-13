@@ -1,0 +1,47 @@
+'use client'
+import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { supabase } from '../lib/supabaseClient'
+
+export default function GirisPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [msg, setMsg] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
+  const router = useRouter()
+  const sp = useSearchParams()
+  const next = sp.get('next') || '/panel'
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setMsg(null); setBusy(true)
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    setBusy(false)
+    if (error) { setMsg(error.message); return }
+
+    // Admin mi?
+    const { data: session } = await supabase.auth.getSession()
+    const uid = session.session?.user.id
+    if (!uid) { setMsg('Oturum alınamadı'); return }
+
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', uid).single()
+    if (profile?.role !== 'admin') {
+      setMsg('Bu alan sadece admin içindir.')
+      await supabase.auth.signOut()
+      return
+    }
+    router.replace(next)
+  }
+
+  return (
+    <main className="container" style={{padding:24, maxWidth:480}}>
+      <h1>Giriş</h1>
+      <form onSubmit={onSubmit} style={{display:'grid', gap:12}}>
+        <input type="email" placeholder="E-posta" value={email} onChange={e=>setEmail(e.target.value)} required />
+        <input type="password" placeholder="Şifre" value={password} onChange={e=>setPassword(e.target.value)} required />
+        <button className="btn primary" disabled={busy} type="submit">{busy? 'Giriş yapılıyor…':'Giriş Yap'}</button>
+        {msg && <div style={{color:'#fca5a5'}}>{msg}</div>}
+      </form>
+    </main>
+  )
+}
