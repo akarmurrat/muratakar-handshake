@@ -11,6 +11,8 @@ const LINKS = [
   { href: '/blog',    label: 'Yazılar' },
   { href: '/cv',      label: 'CV' },
   { href: '/contact', label: 'İletişim' },
+  { href: "/dolar", label: "Dolar" },
+
 ]
 
 export default function Navbar(){
