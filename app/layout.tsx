@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <li><a href="/work">Projeler</a></li>
                 <li><a href="/about">Hakkımda</a></li>
                 <li><a className="btn" href="/contact">İletişim</a></li>
+                <li><a href="/timeline">Zaman Çizgisi</a></li>
               </ul>
             </nav>
             <div className="cta">
