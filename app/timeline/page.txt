@@ -1,4 +1,3 @@
-// app/timeline/page.tsx
 import TimelineHorizontalClient from "@/components/TimelineHorizontalClient";
 
 export const dynamic = "force-dynamic";
