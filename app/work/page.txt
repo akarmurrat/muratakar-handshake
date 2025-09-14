@@ -1,0 +1,27 @@
+// app/work/page.tsx
+import { experience, skills } from "@/lib/siteContent";
+
+export default function WorkPage() {
+  return (
+    <main className="container">
+      <h1 className="text-3xl font-bold my-6">Yaptığım İşler</h1>
+
+      <div className="grid">
+        {experience.map((e) => (
+          <div className="card" key={e.place}>
+            <h3>{e.place}</h3>
+            <p><strong>{e.role}</strong></p>
+            <p className="muted">{e.details}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2>Yetenekler</h2>
+      <div className="card">
+        <p><strong>Teknik:</strong> {skills.tech.join(", ")}</p>
+        <p><strong>CAD/EDA:</strong> {skills.cad.join(", ")}</p>
+        <p><strong>Kişisel:</strong> {skills.soft.join(", ")}</p>
+      </div>
+    </main>
+  );
+}
