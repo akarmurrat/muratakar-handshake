@@ -1,0 +1,18 @@
+// app/projects/page.tsx
+import { projects } from "@/lib/siteContent";
+
+export default function ProjectsPage() {
+  return (
+    <main className="container">
+      <h1 className="text-3xl font-bold my-6">Projeler</h1>
+      <div className="grid">
+        {projects.map((p) => (
+          <div className="card project" key={p.title}>
+            <h3>{p.title}</h3>
+            <p className="muted">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
