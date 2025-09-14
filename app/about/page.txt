@@ -1,0 +1,13 @@
+// app/about/page.tsx
+import { about } from "@/lib/siteContent";
+
+export default function AboutPage() {
+  return (
+    <main className="container">
+      <h1 className="text-3xl font-bold my-6">Hakkımda</h1>
+      <div className="card">
+        <p>{about.paragraph}</p>
+      </div>
+    </main>
+  );
+}
