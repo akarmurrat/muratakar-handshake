@@ -1,30 +1,41 @@
-export default function HomePage(){
+// app/page.tsx
+import Link from "next/link";
+import { hero, highlights } from "@/lib/siteContent";
+
+export default function HomePage() {
   return (
-    <main className="container" style={{paddingTop:32}}>
-      <section className="card" style={{display:'grid', gridTemplateColumns:'1.2fr 1fr', gap:20}}>
-        <div>
-          <h1 style={{fontSize:40, margin:'0 0 8px'}}>Merhaba, ben <span style={{color:'var(--accent)'}}>Murat</span> 👋</h1>
-          <p className="muted">Robotik & otomasyon odağında iş geliştirme, proje yönetimi ve üretim teknolojileri üzerine çalışıyorum.</p>
-          <div style={{display:'flex', gap:8, flexWrap:'wrap', marginTop:12}}>
-            <span className="btn">Satış & İş Geliştirme</span>
-            <span className="btn">Proje Yönetimi</span>
-            <span className="btn">Robotik / Otomasyon</span>
+    <main className="container">
+      {/* HERO */}
+      <section className="hero">
+        <div className="card">
+          <h1>{hero.title}</h1>
+          <p className="muted">{hero.subtitle}</p>
+
+          <div className="badges" style={{ marginTop: 12 }}>
+            {hero.badges.map((b) => (
+              <span className="badge" key={b}>{b}</span>
+            ))}
           </div>
-          <div style={{display:'flex', gap:12, marginTop:18}}>
-            <a className="btn primary" href="/contact">Benimle iletişime geç</a>
-            <a className="btn" href="/work">Projelerimi gör</a>
+
+          <div className="cta">
+            {hero.ctas.map((c) =>
+              c.primary ? (
+                <Link key={c.href} className="primary" href={c.href}>{c.label}</Link>
+              ) : (
+                <Link key={c.href} href={c.href}>{c.label}</Link>
+              )
+            )}
           </div>
         </div>
+
         <div className="card">
-          <h2 style={{marginTop:0}}>Öne çıkanlar</h2>
+          <h2>Öne çıkanlar</h2>
           <ul>
-            <li>🔧 Endüstriyel otomasyon projesi — verimlilik +%18</li>
-            <li>🤝 20+ B2B iş birliği & teklif yönetimi</li>
-            <li>🚀 Hat optimizasyonu ve IoT izleme pilotu</li>
+            {highlights.map((h, i) => <li key={i}>{h.text}</li>)}
           </ul>
-          <p className="muted" style={{marginTop:8}}>Detayları zaman çizelgesinde ve projelerde bulabilirsin.</p>
+          <p className="muted" style={{ marginTop: 8 }}>Bu alanı zamanla güncelleyebilirsin.</p>
         </div>
       </section>
     </main>
-  )
+  );
 }
